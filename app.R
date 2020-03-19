@@ -20,7 +20,8 @@ ui <- dashboardPage(
                     fileInput(inputId = "file", label = NULL, multiple = F, accept = "text/csv"),
                     h5("-OR-"),
                     actionButton(inputId = "runExample", label = "Try example"),
-                    downloadButton(outputId = "downloadExample", label = "Download example")
+                    downloadButton(outputId = "downloadExample", label = "Download example"),
+                    uiOutput(outputId = "videoLink")
                     )
               ),
               fluidRow(
@@ -64,6 +65,11 @@ ui <- dashboardPage(
   
   
 server <- function(input, output, session) {
+  
+  #make link to youtube video
+  output$videoLink <- renderUI({
+    url <- a("tutorial", href= "https://youtu.be/mVt5gOZfsN4")
+    tagList("For more information please see the ", url)})
   
   #initialize reactive variable to store data
   value <- reactiveValues()
